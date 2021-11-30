@@ -1,0 +1,99 @@
+﻿@page
+@model Nonameblog.Pages.Nomeblog.DetailsModel
+@using Microsoft.AspNetCore.Identity
+@using Nonameblog.Models
+@inject UserManager<ApplicationUser> UserManager
+@inject SignInManager<ApplicationUser> SignInManager
+@{
+    ViewData["Title"] = @Html.DisplayFor(model => model.Artcile.Tittle);
+    var Author = await UserManager.FindByIdAsync(Model.Artcile.AuthorID);
+}
+
+<div>
+    <div class="form-group">
+        <h1><strong> @Html.DisplayFor(model => model.Artcile.Tittle)</strong></h1>
+        <h4><strong><a asp-page="./Information" asp-route-id="@Author.Id" style="font-size:20px">@Author.Name</a> </strong></h4><p></p>
+        <h4><strong>@Html.DisplayFor(model => model.Artcile.Type)  @Html.DisplayFor(model => model.Artcile.ReleaseDate)</strong></h4>
+
+        @{
+            if (SignInManager.IsSignedIn(User))
+            {
+                    if (UserManager.GetUserId(User) == Model.Artcile.AuthorID)
+                    {
+                        <div>
+                            <a asp-page="./Edit" asp-route-id="@Model.Artcile.ID">編輯</a> |
+                            <a asp-page="./Delete" asp-route-id="@Model.Artcile.ID">刪除</a>
+                        </div>
+                    }
+            }
+        }
+
+        <hr />
+        <span style="font-size:30px;word-break: break-all" face="DFKai-sb">@Html.Raw(Model.Artcile.Content)</span><p></p>
+    </div>
+
+    <div class="form-group">
+        <hr /><br />
+        <h1><strong>最新留言：</strong></h1><br />
+        @{
+            var orderedList = Model._Comment.OrderByDescending(x => x.CommentTime).ToList();
+            foreach (var item in orderedList)
+            {
+                if (item.PKID == Model.Artcile.ID)
+                {
+                    var commer = await UserManager.FindByIdAsync(item.Name);
+                    if (commer != null)
+                    {
+                        <div class="media">
+                            <div class="media-left">
+                                <img src="~/uploads/@commer.Photo" class="media-object" style="width:60px" onerror="this.onerror = null; this.src='/uploads/default.png'">
+                            </div>
+                            <div class="media-body">
+                                <h3 class="media-heading"><a asp-page="./Information" asp-route-id="@commer.Id">@commer.Name</a>  於 @item.CommentTime 回覆：</h3>
+                                <p>@item.Message</p>
+                            </div>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="media">
+                            <div class="media-left">
+                                <img src="~/img/img_avatar1.png" class="media-object" style="width:60px">
+                            </div>
+                            <div class="media-body">
+                                <h3 class="media-heading">@item.Name 於 @item.CommentTime 回覆：</h3>
+                                <p>@item.Message</p>
+                            </div>
+                        </div>
+                    }
+                    <hr>
+                }
+            }
+        }
+    </div>
+    <div class="form-group">
+        <hr /><br /><br /><br />
+        <form method="post">
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <INPUT TYPE="HIDDEN" name="Name" VALUE="@UserManager.GetUserId(User)">
+            <div class="form-group">
+                <label for="title">內容:</label><br />
+                <textarea asp-for="Comment.Message" cols="40" rows="5" style="resize:none;font-size:20px" placeholder="留下你的回覆... " name="Message"></textarea>
+                <span asp-validation-for="Comment.Message" class="text-danger"></span>
+            </div>
+            @Html.Raw(TempData["msg"])
+            <div class="form-group">
+                <input type="submit" value="送出" class="btn btn-default" />
+                @*<input class="btn btn-default" type="button" value="取消" onclick="javascript:location.href='/Nomeblog'" />*@
+            </div>
+        </form>
+    </div>
+</div>
+<div>
+    <p></p><br />
+    @*<a href="#" onClick="history.back()" style="color:darkgreen">※返回列表※</a>*@
+    <a href="#" onclick="javascript:location.href='/Nomeblog'" style="color:darkgreen">※返回列表※</a>
+</div>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

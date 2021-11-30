@@ -1,0 +1,21 @@
+﻿@page
+@model Nonameblog.Pages.Nomeblog.category.foodModel
+@{
+    ViewData["Title"] = "美食";
+}
+
+@{
+    var orderedList = Model.Artcile.OrderByDescending(x => x.ReleaseDate).ToList();
+    foreach (var item in orderedList)
+    {
+        if (item.Type == Models.Artcile_type.美食)
+        {
+            <div style="width:400px;font-family:DFKai-SB; white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">【@item.Type】  @item.Tittle</div><p></p>
+            <div style="width:600px;height:150px ;white-space:nowrap;overflow-y:scroll;overflow-x:hidden;text-overflow:ellipsis; font-size:20px; font-family:DFKai-SB">@Html.Raw(item.Content)</div>
+            <br /><a asp-page="../Details" asp-route-id="@item.ID" style="font-size:20px">閱讀更多...</a>
+            <hr width="100%" size="3">
+        }
+    }
+
+}
+

@@ -1,0 +1,51 @@
+﻿@page
+@model Nonameblog.Pages.Nomeblog.EditModel
+
+@{
+    ViewData["Title"] = "編輯文章";
+}
+
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Artcile.ID" />
+            <input type="hidden" asp-for="Artcile.AuthorID" />
+            <div class="form-group">
+                <label for="title">標題:</label><br />
+                <input asp-for="Artcile.Tittle" class="form-control" />
+                <span asp-validation-for="Artcile.Tittle" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label for="title">類型:</label><br />
+                <select asp-for="Artcile.Type">
+                    <option value="美食">美食</option>
+                    <option value="廢文">廢文</option>
+                    <option value="恐怖">恐怖</option>
+                </select><br />
+            </div>
+            <div class="form-group">
+                <label for="title">內容:</label><br />
+                <textarea asp-for="Artcile.Content" cols="40" rows="5" style="resize:none;font-size:20px"></textarea>
+                <script>
+                    CKEDITOR.replace('Artcile.Content', { width: 800, });
+                </script>
+                <span asp-validation-for="Artcile.Content" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="儲存" class="btn btn-default" />
+                <input class="btn btn-default" type="button" value="取消" onclick="javascript:location.href='/Nomeblog'" />
+            </div>
+        </form>
+    </div>
+</div>
+
+@*<div>
+    <a asp-page="./Index">反回列表</a>
+</div>*@
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

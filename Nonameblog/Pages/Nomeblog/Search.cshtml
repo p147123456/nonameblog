@@ -1,0 +1,27 @@
+﻿@page
+@model Nonameblog.Pages.Nomeblog.SearchModel
+@{
+    ViewData["Title"] = "搜尋結果";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+@{
+    if (Model.Artcile.Count > 0)
+    {
+        var orderedList = Model.Artcile.OrderByDescending(x => x.ReleaseDate).ToList();
+        foreach (var item in orderedList)
+        {
+            <div style="width:400px;font-family:DFKai-SB; white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">【@item.Type】  @item.Tittle</div><p></p>
+            <div style="width:600px;height:150px ;white-space:nowrap;overflow-y:scroll;overflow-x:hidden;text-overflow:ellipsis; font-size:20px; font-family:DFKai-SB"><pre>@Html.Raw(item.Content)</pre></div>
+            <br /><a asp-page="./Details" asp-route-id="@item.ID" style="font-size:20px">閱讀更多...</a>
+            <hr width="100%" size="3">
+        }
+    }
+    else
+    {
+        <h1>找不到關於【@Model.SearchString】的資訊...</h1><p></p><br />
+        <a asp-page="/Nomeblog/Index">去論壇列表探索其他文章吧</a>
+    }
+
+}
+

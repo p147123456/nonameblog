@@ -1,0 +1,122 @@
+/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification 
+for details on configuring this project to bundle and minify static web assets. */
+body {
+    height: 100%;
+}
+
+/* Wrapping element */
+/* Set some basic padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Carousel */
+.carousel-caption p {
+    font-size: 20px;
+    line-height: 1.4;
+}
+
+/* Make .svg files in the carousel display properly in older browsers */
+.carousel-inner .item img[src$=".svg"] {
+    width: 100%;
+}
+
+/* QR code generator */
+#qrCode {
+    margin: 15px;
+}
+
+/* Hide/rearrange for smaller screens */
+@media screen and (max-width: 767px) {
+    /* Hide captions */
+    .carousel-caption {
+        display: none;
+    }
+}
+#sitebody {
+    margin : 50px;
+}
+
+#header {
+    width : 100%;
+    max-height:50vh;
+    text-align: center;
+    line-height: 80px;
+    float:right;
+}
+
+.headerimg {
+    float : right;
+    width: 100vw;
+    max-height:50vh;
+}
+
+#sidebar_left {
+    width: 20vw;
+    height: auto;
+    margin-left: 10px;
+    font-size: 30px;
+    line-height: 100px;
+    float: left;
+    border:1px;
+    text-align:center;
+}
+.sidebar {
+    width: 20vw;
+    height: auto;
+    text-align: center;
+    line-height: 400px;
+    float: left;
+}
+/*#sidebar_right {
+    width: 120px;
+    height: 400px;
+    text-align: center;
+    line-height: 400px;
+    float: right;
+}*/
+
+#content {
+    font-size: 30px;
+    line-height: normal;
+    font-weight: 400;
+    height: auto;
+    width: 60vw;
+    float: left;
+    margin: 25px;
+}
+
+#footer {
+    font-size: 20px;
+    text-align: center;
+    position: relative;
+    margin-bottom: -180px; /* negative value of footer height */
+    background-color: #ffffff;
+    /*height: 10px;*/
+    clear: both;
+}
+#replyside {
+    BORDER: none;
+    PADDING: 7px;
+    FONT-SIZE: 10px;
+    font-weight: normal;
+    COLOR: #cc0033;
+    background: #ffffcc;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-position: right top;
+    FILTER: Alpha(opacity=70);
+    font-family: verdana, arial, sans-serif;
+    TEXT-ALIGN: left;
+}
+#Main {
+    overflow: auto;
+    padding-bottom: 180px;
+    float: left;
+    background-color: #ffffff;
+    width: 100vw;
+}
+.wrap {
+    min-height: 100%;
+}

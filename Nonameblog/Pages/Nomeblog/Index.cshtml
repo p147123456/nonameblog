@@ -1,0 +1,65 @@
+﻿@page
+@model Nonameblog.Pages.Nomeblog.IndexModel
+
+@{
+    ViewData["Title"] = "全部";
+}
+
+@{
+    var orderedList = Model.Artcile.OrderByDescending(x => x.ReleaseDate).ToList();
+    foreach (var item in orderedList)
+    {
+        <div style="width:400px;font-family:DFKai-SB; white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">【@item.Type】  @item.Tittle</div><p></p>
+        <div style="width:600px;height:150px ;white-space:nowrap;overflow-y:scroll;overflow-x:hidden;text-overflow:ellipsis; font-size:20px; font-family:DFKai-SB"><pre>@Html.Raw(item.Content)</pre></div>
+        <br /><a asp-page="./Details" asp-route-id="@item.ID" style="font-size:20px">閱讀更多...</a>
+
+        @*<div>
+            <a asp-page="./Edit" asp-route-id="@item.ID">編輯</a> |
+            <a asp-page="./Delete" asp-route-id="@item.ID">刪除</a>
+        </div>*@
+
+        <hr width="100%" size="3">
+    }
+}
+@*<table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Artcile[0].Tittle)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Artcile[0].ReleaseDate)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Artcile[0].Content)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Artcile[0].Type)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+    @foreach (var item in Model.Artcile) {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Tittle)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ReleaseDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Content)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Type)
+                </td>
+                <td>
+                    <a asp-page="./Edit" asp-route-id="@item.ID">Edit</a> |
+                    <a asp-page="./Details" asp-route-id="@item.ID">Details</a> |
+                    <a asp-page="./Delete" asp-route-id="@item.ID">Delete</a>
+                </td>
+            </tr>
+    }
+        </tbody>
+    </table>*@

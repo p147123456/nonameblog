@@ -1,0 +1,33 @@
+﻿@page
+@model Nonameblog.Pages.Nomeblog.InformationModel
+@{
+    ViewData["Title"] = @Model.currentUser.Name + "的小窩";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+<img src="~/uploads/@Model.currentUser.Photo" class="media-object" style="max-width:500px;max-height:500px" onerror="this.onerror = null; this.src='/uploads/default.png'">
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                暱稱
+            </th>
+            <th>
+                信箱
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+                @Model.currentUser.Name
+            </td>
+            <td>
+                @Model.currentUser.Email
+            </td>
+        </tr>
+    </tbody>
+</table>
+<p></p><br />
+<a href="#" onClick="history.back()" style="color:darkgreen">※回上一頁※</a>
+

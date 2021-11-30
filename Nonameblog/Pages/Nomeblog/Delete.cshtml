@@ -1,0 +1,51 @@
+﻿@page
+@model Nonameblog.Pages.Nomeblog.DeleteModel
+
+@{
+    ViewData["Title"] = "刪除文章";
+}
+
+
+<h1 style="color:red">確定是否刪除？</h1>
+<div>
+    <div class="form-group">
+        <h1><strong> @Html.DisplayFor(model => model.Artcile.Tittle)</strong></h1>
+        <h4><strong>@Html.DisplayFor(model => model.Artcile.Type)  @Html.DisplayFor(model => model.Artcile.ReleaseDate)</strong></h4>
+        <hr />
+        <span style="font-size:30px;word-break: break-all" face="DFKai-sb">@Html.Raw(Model.Artcile.Content)</span><p></p>
+    </div>
+    <hr />
+    @*<dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Artcile.Tittle)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Artcile.Tittle)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Artcile.ReleaseDate)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Artcile.ReleaseDate)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Artcile.Content)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Artcile.Content)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Artcile.Type)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Artcile.Type)
+            </dd>
+        </dl>*@
+
+    <form method="post">
+        <input type="hidden" asp-for="Artcile.ID" />
+        <input type="submit" value="刪除" class="btn btn-default" /> 
+        <input class="btn btn-default" type="button" value="取消" onclick="javascript:location.href='/Nomeblog'" />
+   
+    </form>
+</div>
