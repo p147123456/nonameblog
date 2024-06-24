@@ -1,2 +1,2 @@
 # nonameblog
-a test blog!
+a free blog!
